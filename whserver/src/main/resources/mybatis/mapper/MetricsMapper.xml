@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wh.whserver.mybatis.dao.MetricsMapper">
+  <resultMap id="BaseResultMap" type="com.wh.whserver.mybatis.pojo.Metrics">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+    <result column="rule" jdbcType="VARCHAR" property="rule" />
+    <result column="data_type" jdbcType="VARCHAR" property="dataType" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="opttime" jdbcType="TIMESTAMP" property="opttime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, detail, rule, data_type, user_id, opttime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from metrics
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from metrics
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wh.whserver.mybatis.pojo.Metrics" useGeneratedKeys="true">
+    insert into metrics (name, detail, rule, 
+      data_type, user_id, opttime
+      )
+    values (#{name,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{rule,jdbcType=VARCHAR}, 
+      #{dataType,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{opttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wh.whserver.mybatis.pojo.Metrics" useGeneratedKeys="true">
+    insert into metrics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="detail != null">
+        detail,
+      </if>
+      <if test="rule != null">
+        rule,
+      </if>
+      <if test="dataType != null">
+        data_type,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="opttime != null">
+        opttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="rule != null">
+        #{rule,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null">
+        #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="opttime != null">
+        #{opttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wh.whserver.mybatis.pojo.Metrics">
+    update metrics
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="rule != null">
+        rule = #{rule,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null">
+        data_type = #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="opttime != null">
+        opttime = #{opttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wh.whserver.mybatis.pojo.Metrics">
+    update metrics
+    set name = #{name,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      rule = #{rule,jdbcType=VARCHAR},
+      data_type = #{dataType,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      opttime = #{opttime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

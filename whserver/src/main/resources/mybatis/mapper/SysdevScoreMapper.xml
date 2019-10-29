@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wh.whserver.mybatis.dao.SysdevScoreMapper">
+  <resultMap id="BaseResultMap" type="com.wh.whserver.mybatis.pojo.SysdevScore">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="score_id" jdbcType="INTEGER" property="scoreId" />
+    <result column="score" jdbcType="VARCHAR" property="score" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, createtime, type, score_id, score
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sysdev_score
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sysdev_score
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wh.whserver.mybatis.pojo.SysdevScore" useGeneratedKeys="true">
+    insert into sysdev_score (createtime, type, score_id, 
+      score)
+    values (#{createtime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{scoreId,jdbcType=INTEGER}, 
+      #{score,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wh.whserver.mybatis.pojo.SysdevScore" useGeneratedKeys="true">
+    insert into sysdev_score
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="scoreId != null">
+        score_id,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="scoreId != null">
+        #{scoreId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wh.whserver.mybatis.pojo.SysdevScore">
+    update sysdev_score
+    <set>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="scoreId != null">
+        score_id = #{scoreId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wh.whserver.mybatis.pojo.SysdevScore">
+    update sysdev_score
+    set createtime = #{createtime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER},
+      score_id = #{scoreId,jdbcType=INTEGER},
+      score = #{score,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

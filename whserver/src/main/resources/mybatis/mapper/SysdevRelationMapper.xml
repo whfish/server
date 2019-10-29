@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wh.whserver.mybatis.dao.SysdevRelationMapper">
+  <resultMap id="BaseResultMap" type="com.wh.whserver.mybatis.pojo.SysdevRelation">
+    <id column="sys_id" jdbcType="INTEGER" property="sysId" />
+    <id column="dev_id" jdbcType="INTEGER" property="devId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="opttime" jdbcType="TIMESTAMP" property="opttime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sys_id, dev_id, user_id, opttime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.wh.whserver.mybatis.pojo.SysdevRelationKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sysdev_relation
+    where sys_id = #{sysId,jdbcType=INTEGER}
+      and dev_id = #{devId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.wh.whserver.mybatis.pojo.SysdevRelationKey">
+    delete from sysdev_relation
+    where sys_id = #{sysId,jdbcType=INTEGER}
+      and dev_id = #{devId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wh.whserver.mybatis.pojo.SysdevRelation">
+    insert into sysdev_relation (sys_id, dev_id, user_id, 
+      opttime)
+    values (#{sysId,jdbcType=INTEGER}, #{devId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{opttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wh.whserver.mybatis.pojo.SysdevRelation">
+    insert into sysdev_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sysId != null">
+        sys_id,
+      </if>
+      <if test="devId != null">
+        dev_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="opttime != null">
+        opttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sysId != null">
+        #{sysId,jdbcType=INTEGER},
+      </if>
+      <if test="devId != null">
+        #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="opttime != null">
+        #{opttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wh.whserver.mybatis.pojo.SysdevRelation">
+    update sysdev_relation
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="opttime != null">
+        opttime = #{opttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sys_id = #{sysId,jdbcType=INTEGER}
+      and dev_id = #{devId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wh.whserver.mybatis.pojo.SysdevRelation">
+    update sysdev_relation
+    set user_id = #{userId,jdbcType=INTEGER},
+      opttime = #{opttime,jdbcType=TIMESTAMP}
+    where sys_id = #{sysId,jdbcType=INTEGER}
+      and dev_id = #{devId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wh.whserver.mybatis.dao.DataCollectionMapper">
+  <resultMap id="BaseResultMap" type="com.wh.whserver.mybatis.pojo.DataCollection">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="datetime" jdbcType="TIMESTAMP" property="datetime" />
+    <result column="mt_id" jdbcType="INTEGER" property="mtId" />
+    <result column="dev_id" jdbcType="INTEGER" property="devId" />
+    <result column="sys_id" jdbcType="INTEGER" property="sysId" />
+    <result column="data" jdbcType="VARCHAR" property="data" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, datetime, mt_id, dev_id, sys_id, data, source
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from data_collection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from data_collection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wh.whserver.mybatis.pojo.DataCollection" useGeneratedKeys="true">
+    insert into data_collection (datetime, mt_id, dev_id, 
+      sys_id, data, source
+      )
+    values (#{datetime,jdbcType=TIMESTAMP}, #{mtId,jdbcType=INTEGER}, #{devId,jdbcType=INTEGER}, 
+      #{sysId,jdbcType=INTEGER}, #{data,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wh.whserver.mybatis.pojo.DataCollection" useGeneratedKeys="true">
+    insert into data_collection
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="datetime != null">
+        datetime,
+      </if>
+      <if test="mtId != null">
+        mt_id,
+      </if>
+      <if test="devId != null">
+        dev_id,
+      </if>
+      <if test="sysId != null">
+        sys_id,
+      </if>
+      <if test="data != null">
+        data,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="datetime != null">
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtId != null">
+        #{mtId,jdbcType=INTEGER},
+      </if>
+      <if test="devId != null">
+        #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="sysId != null">
+        #{sysId,jdbcType=INTEGER},
+      </if>
+      <if test="data != null">
+        #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wh.whserver.mybatis.pojo.DataCollection">
+    update data_collection
+    <set>
+      <if test="datetime != null">
+        datetime = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtId != null">
+        mt_id = #{mtId,jdbcType=INTEGER},
+      </if>
+      <if test="devId != null">
+        dev_id = #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="sysId != null">
+        sys_id = #{sysId,jdbcType=INTEGER},
+      </if>
+      <if test="data != null">
+        data = #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wh.whserver.mybatis.pojo.DataCollection">
+    update data_collection
+    set datetime = #{datetime,jdbcType=TIMESTAMP},
+      mt_id = #{mtId,jdbcType=INTEGER},
+      dev_id = #{devId,jdbcType=INTEGER},
+      sys_id = #{sysId,jdbcType=INTEGER},
+      data = #{data,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
